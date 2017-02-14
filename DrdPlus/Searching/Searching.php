@@ -1,10 +1,13 @@
 <?php
 namespace DrdPlus\Searching;
 
+use DrdPlus\Calculations\SumAndRound;
 use DrdPlus\Codes\ActivityIntensityCode;
 use DrdPlus\Codes\SearchingItemTypeCode;
 use DrdPlus\RollsOn\Traps\RollOnSenses;
+use DrdPlus\Tables\Measurements\Time\Time;
 use DrdPlus\Tables\Tables;
+use Granam\Float\PositiveFloat;
 use Granam\Strict\Object\StrictObject;
 
 /**
@@ -72,6 +75,22 @@ class Searching extends StrictObject
     }
 
     /**
+     * @param PositiveFloat $squareMetersToExplore
+     * @param Tables $tables
+     * @return Time
+     * @throws \DrdPlus\Searching\Exceptions\ThoroughSearchCanNotBeMadeWhenDoingFullConcentrationActivity
+     */
+    public function getQuickSearchTime(PositiveFloat $squareMetersToExplore, Tables $tables)
+    {
+        $timeValue = SumAndRound::round($squareMetersToExplore->getValue() / 10);
+        if ($timeValue === 0) {
+            $timeValue = SumAndRound::ceil($squareMetersToExplore->getValue() / 10);
+        }
+
+        return new Time($timeValue, Time::ROUND, $tables->getTimeTable());
+    }
+
+    /**
      * @param RollOnSenses $rollOnSenses
      * @param SearchingItemTypeCode $searchingItemTypeCode
      * @return int
@@ -101,5 +120,21 @@ class Searching extends StrictObject
         }
 
         return $rollValue;
+    }
+
+    /**
+     * @param PositiveFloat $squareMetersToSearch
+     * @param Tables $tables
+     * @return Time
+     * @throws \DrdPlus\Searching\Exceptions\ThoroughSearchCanNotBeMadeWhenDoingFullConcentrationActivity
+     */
+    public function getThoroughSearchTime(PositiveFloat $squareMetersToSearch, Tables $tables)
+    {
+        $timeValue = 0.0;
+        if ($squareMetersToSearch->getValue() > 0.0) {
+            $timeValue = $squareMetersToSearch->getValue() / 2;
+        }
+
+        return new Time($timeValue, Time::MINUTE, $tables->getTimeTable());
     }
 }

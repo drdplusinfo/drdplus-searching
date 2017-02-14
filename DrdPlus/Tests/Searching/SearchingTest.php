@@ -6,7 +6,9 @@ use DrdPlus\Codes\SearchingItemTypeCode;
 use DrdPlus\RollsOn\Traps\RollOnSenses;
 use DrdPlus\Searching\Searching;
 use DrdPlus\Tables\Environments\MalusesToAutomaticSearchingTable;
+use DrdPlus\Tables\Measurements\Time\Time;
 use DrdPlus\Tables\Tables;
+use Granam\Float\PositiveFloatObject;
 use Granam\Tests\Tools\TestWithMockery;
 
 class SearchingTest extends TestWithMockery
@@ -101,6 +103,35 @@ class SearchingTest extends TestWithMockery
 
     /**
      * @test
+     * @dataProvider provideValuesForQuickSearchTime
+     * @param float $squareMetersToExplore
+     * @param float $expectedTime
+     * @param string $expectedTimeUnit
+     */
+    public function I_can_get_time_of_quick_search($squareMetersToExplore, $expectedTime, $expectedTimeUnit)
+    {
+        self::assertEquals(
+            new Time($expectedTime, $expectedTimeUnit, Tables::getIt()->getTimeTable()),
+            (new Searching(ActivityIntensityCode::getIt(ActivityIntensityCode::AUTOMATIC_ACTIVITY)))->getQuickSearchTime(
+                new PositiveFloatObject($squareMetersToExplore),
+                Tables::getIt()
+            )
+        );
+    }
+
+    public function provideValuesForQuickSearchTime()
+    {
+        return [
+            [0, 0.0, Time::ROUND],
+            [0.1, 1.0, Time::ROUND],
+            [1, 1.0, Time::ROUND],
+            [10, 1.0, Time::ROUND],
+            [95, 10.0, Time::ROUND],
+        ];
+    }
+
+    /**
+     * @test
      * @dataProvider provideValuesForThoroughSearch
      * @param $activityIntensity
      * @param $rollOnSenses
@@ -142,6 +173,35 @@ class SearchingTest extends TestWithMockery
                 $this->createRollOnSenses(123, true),
                 SearchingItemTypeCode::getIt(SearchingItemTypeCode::SEARCHING_DIFFERENT_TYPE_ITEM)
             );
+    }
+
+    /**
+     * @test
+     * @dataProvider provideValuesForThoroughSearchTime
+     * @param float $squareMetersToExplore
+     * @param float $expectedTime
+     * @param string $expectedTimeUnit
+     */
+    public function I_can_get_time_of_thorough_search($squareMetersToExplore, $expectedTime, $expectedTimeUnit)
+    {
+        self::assertEquals(
+            new Time($expectedTime, $expectedTimeUnit, Tables::getIt()->getTimeTable()),
+            (new Searching(ActivityIntensityCode::getIt(ActivityIntensityCode::AUTOMATIC_ACTIVITY)))->getThoroughSearchTime(
+                new PositiveFloatObject($squareMetersToExplore),
+                Tables::getIt()
+            )
+        );
+    }
+
+    public function provideValuesForThoroughSearchTime()
+    {
+        return [
+            [0, 0.0, Time::MINUTE],
+            [0.1, 0.05, Time::MINUTE],
+            [1, 0.5, Time::MINUTE],
+            [10, 5.0, Time::MINUTE],
+            [95, 47.5, Time::MINUTE],
+        ];
     }
 
 }
