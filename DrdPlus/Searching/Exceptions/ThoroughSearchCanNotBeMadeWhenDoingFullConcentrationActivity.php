@@ -1,0 +1,7 @@
+<?php
+namespace DrdPlus\Searching\Exceptions;
+
+class ThoroughSearchCanNotBeMadeWhenDoingFullConcentrationActivity extends NonAutomaticSearchCanNotBeMadeWhenDoingFullConcentrationActivity
+{
+
+}
