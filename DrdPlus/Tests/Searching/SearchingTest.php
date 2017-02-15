@@ -125,7 +125,7 @@ class SearchingTest extends TestWithMockery
             [0, 0.0, Time::ROUND],
             [0.1, 1.0, Time::ROUND],
             [1, 1.0, Time::ROUND],
-            [10, 1.0, Time::ROUND],
+            [2*5, 1.0, Time::ROUND], /** @link https://pph.drdplus.jaroslavtyc.com/#cas_prohledani_prostoru_o_rozmerech_2_5_metru */
             [95, 10.0, Time::ROUND],
         ];
     }
@@ -199,7 +199,9 @@ class SearchingTest extends TestWithMockery
             [0, 0.0, Time::MINUTE],
             [0.1, 0.05, Time::MINUTE],
             [1, 0.5, Time::MINUTE],
-            [10, 5.0, Time::MINUTE],
+            [2*5, 5.0, Time::MINUTE], /** @link https://pph.drdplus.jaroslavtyc.com/#cas_prohledani_prostoru_o_rozmerech_2_5_metru */
+            [2*(4*2 + 5*2), 18.0, Time::MINUTE], /** @link https://pph.drdplus.jaroslavtyc.com/#cas_prohledani_mistnosti_o_rozmerech_4_5_2_metru */
+            [2*(4*2 + 5*2) + 4*5, 28.0, Time::MINUTE], /** @link https://pph.drdplus.jaroslavtyc.com/#cas_prohledani_mistnosti_o_rozmerech_4_5_2_metru */
             [95, 47.5, Time::MINUTE],
         ];
     }
