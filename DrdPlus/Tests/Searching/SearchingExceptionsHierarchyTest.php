@@ -1,7 +1,7 @@
 <?php
 namespace DrdPlus\Tests\Searching;
 
-use Granam\Tests\Exceptions\Tools\AbstractExceptionsHierarchyTest;
+use Granam\Tests\ExceptionsHierarchy\Exceptions\AbstractExceptionsHierarchyTest;
 
 class SearchingExceptionsHierarchyTest extends AbstractExceptionsHierarchyTest
 {
