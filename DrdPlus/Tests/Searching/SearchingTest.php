@@ -3,7 +3,7 @@ namespace DrdPlus\Tests\Searching;
 
 use DrdPlus\Codes\ActivityIntensityCode;
 use DrdPlus\Codes\SearchingItemTypeCode;
-use DrdPlus\Codes\TimeCode;
+use DrdPlus\Codes\TimeUnitCode;
 use DrdPlus\RollsOn\Traps\RollOnSenses;
 use DrdPlus\Searching\Searching;
 use DrdPlus\Tables\Environments\MalusesToAutomaticSearchingTable;
@@ -123,11 +123,11 @@ class SearchingTest extends TestWithMockery
     public function provideValuesForQuickSearchTime()
     {
         return [
-            [0, 0.0, TimeCode::ROUND],
-            [0.1, 1.0, TimeCode::ROUND],
-            [1, 1.0, TimeCode::ROUND],
-            [2*5, 1.0, TimeCode::ROUND], /** @link https://pph.drdplus.jaroslavtyc.com/#cas_prohledani_prostoru_o_rozmerech_2_5_metru */
-            [95, 10.0, TimeCode::ROUND],
+            [0, 0.0, TimeUnitCode::ROUND],
+            [0.1, 1.0, TimeUnitCode::ROUND],
+            [1, 1.0, TimeUnitCode::ROUND],
+            [2*5, 1.0, TimeUnitCode::ROUND], /** @link https://pph.drdplus.jaroslavtyc.com/#cas_prohledani_prostoru_o_rozmerech_2_5_metru */
+            [95, 10.0, TimeUnitCode::ROUND],
         ];
     }
 
@@ -197,13 +197,13 @@ class SearchingTest extends TestWithMockery
     public function provideValuesForThoroughSearchTime()
     {
         return [
-            [0, 0.0, TimeCode::MINUTE],
-            [0.1, 0.05, TimeCode::MINUTE],
-            [1, 0.5, TimeCode::MINUTE],
-            [2*5, 5.0, TimeCode::MINUTE], /** @link https://pph.drdplus.jaroslavtyc.com/#cas_prohledani_prostoru_o_rozmerech_2_5_metru */
-            [2*(4*2 + 5*2), 18.0, TimeCode::MINUTE], /** @link https://pph.drdplus.jaroslavtyc.com/#cas_prohledani_mistnosti_o_rozmerech_4_5_2_metru */
-            [2*(4*2 + 5*2) + 4*5, 28.0, TimeCode::MINUTE], /** @link https://pph.drdplus.jaroslavtyc.com/#cas_prohledani_mistnosti_o_rozmerech_4_5_2_metru */
-            [95, 47.5, TimeCode::MINUTE],
+            [0, 0.0, TimeUnitCode::MINUTE],
+            [0.1, 0.05, TimeUnitCode::MINUTE],
+            [1, 0.5, TimeUnitCode::MINUTE],
+            [2*5, 5.0, TimeUnitCode::MINUTE], /** @link https://pph.drdplus.jaroslavtyc.com/#cas_prohledani_prostoru_o_rozmerech_2_5_metru */
+            [2*(4*2 + 5*2), 18.0, TimeUnitCode::MINUTE], /** @link https://pph.drdplus.jaroslavtyc.com/#cas_prohledani_mistnosti_o_rozmerech_4_5_2_metru */
+            [2*(4*2 + 5*2) + 4*5, 28.0, TimeUnitCode::MINUTE], /** @link https://pph.drdplus.jaroslavtyc.com/#cas_prohledani_mistnosti_o_rozmerech_4_5_2_metru */
+            [95, 47.5, TimeUnitCode::MINUTE],
         ];
     }
 

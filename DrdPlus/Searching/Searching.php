@@ -4,7 +4,7 @@ namespace DrdPlus\Searching;
 use DrdPlus\Calculations\SumAndRound;
 use DrdPlus\Codes\ActivityIntensityCode;
 use DrdPlus\Codes\SearchingItemTypeCode;
-use DrdPlus\Codes\TimeCode;
+use DrdPlus\Codes\TimeUnitCode;
 use DrdPlus\RollsOn\Traps\RollOnSenses;
 use DrdPlus\Tables\Measurements\Time\Time;
 use DrdPlus\Tables\Tables;
@@ -88,7 +88,7 @@ class Searching extends StrictObject
             $timeValue = SumAndRound::ceil($squareMetersToExplore->getValue() / 10);
         }
 
-        return new Time($timeValue, TimeCode::ROUND, $tables->getTimeTable());
+        return new Time($timeValue, TimeUnitCode::ROUND, $tables->getTimeTable());
     }
 
     /**
@@ -136,6 +136,6 @@ class Searching extends StrictObject
             $timeValue = $squareMetersToSearch->getValue() / 2;
         }
 
-        return new Time($timeValue, TimeCode::MINUTE, $tables->getTimeTable());
+        return new Time($timeValue, TimeUnitCode::MINUTE, $tables->getTimeTable());
     }
 }
