@@ -3,7 +3,7 @@ namespace DrdPlus\Tests\Searching;
 
 use DrdPlus\Codes\ActivityIntensityCode;
 use DrdPlus\Codes\SearchingItemTypeCode;
-use DrdPlus\Codes\TimeUnitCode;
+use DrdPlus\Codes\Units\TimeUnitCode;
 use DrdPlus\RollsOn\Traps\RollOnSenses;
 use DrdPlus\Searching\Searching;
 use DrdPlus\Tables\Environments\MalusesToAutomaticSearchingTable;

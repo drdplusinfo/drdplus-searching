@@ -4,7 +4,7 @@ namespace DrdPlus\Searching;
 use DrdPlus\Calculations\SumAndRound;
 use DrdPlus\Codes\ActivityIntensityCode;
 use DrdPlus\Codes\SearchingItemTypeCode;
-use DrdPlus\Codes\TimeUnitCode;
+use DrdPlus\Codes\Units\TimeUnitCode;
 use DrdPlus\RollsOn\Traps\RollOnSenses;
 use DrdPlus\Tables\Measurements\Time\Time;
 use DrdPlus\Tables\Tables;
