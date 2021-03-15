@@ -1,5 +1,4 @@
-<?php
-declare(strict_types = 1);
+<?php declare(strict_types = 1);
 
 namespace DrdPlus\Tests\Searching;
 
@@ -7,7 +6,7 @@ use DrdPlus\Codes\Environment\ItemStealthinessCode;
 use DrdPlus\Searching\ItemStealthiness;
 use DrdPlus\Tables\Environments\StealthinessTable;
 use DrdPlus\Tables\Tables;
-use Granam\Tests\Tools\TestWithMockery;
+use Granam\TestWithMockery\TestWithMockery;
 
 class ItemStealthinessTest extends TestWithMockery
 {

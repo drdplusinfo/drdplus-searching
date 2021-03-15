@@ -1,5 +1,4 @@
-<?php
-declare(strict_types = 1);
+<?php declare(strict_types=1);
 
 namespace DrdPlus\Tests\Searching;
 
@@ -12,17 +11,17 @@ use DrdPlus\Tables\Environments\MalusesToAutomaticSearchingTable;
 use DrdPlus\Tables\Measurements\Time\Time;
 use DrdPlus\Tables\Tables;
 use Granam\Float\PositiveFloatObject;
-use Granam\Tests\Tools\TestWithMockery;
+use Granam\TestWithMockery\TestWithMockery;
 
 class SearchingTest extends TestWithMockery
 {
 
     /**
      * @test
-     * @expectedException \DrdPlus\Searching\Exceptions\CanNotSearchWhenInATrance
      */
     public function I_can_not_create_search_when_in_a_trance()
     {
+        $this->expectException(\DrdPlus\Searching\Exceptions\CanNotSearchWhenInATrance::class);
         new Searching(ActivityIntensityCode::getIt(ActivityIntensityCode::TRANS));
     }
 
@@ -96,10 +95,10 @@ class SearchingTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException \DrdPlus\Searching\Exceptions\QuickSearchCanNotBeMadeWhenDoingFullConcentrationActivity
      */
     public function I_can_not_make_quick_search_when_doing_full_concentration_activity()
     {
+        $this->expectException(\DrdPlus\Searching\Exceptions\QuickSearchCanNotBeMadeWhenDoingFullConcentrationActivity::class);
         (new Searching(ActivityIntensityCode::getIt(ActivityIntensityCode::ACTIVITY_WITH_FULL_CONCENTRATION)))
             ->getQuickSearchQuality($this->createRollOnSenses(123));
     }
@@ -128,7 +127,7 @@ class SearchingTest extends TestWithMockery
             [0, 0.0, TimeUnitCode::ROUND],
             [0.1, 1.0, TimeUnitCode::ROUND],
             [1, 1.0, TimeUnitCode::ROUND],
-            [2*5, 1.0, TimeUnitCode::ROUND], /** @link https://pph.drdplus.drdplus.info/#cas_prohledani_prostoru_o_rozmerech_2_5_metru */
+            [2 * 5, 1.0, TimeUnitCode::ROUND], /** @link https://pph.drdplus.drdplus.info/#cas_prohledani_prostoru_o_rozmerech_2_5_metru */
             [95, 10.0, TimeUnitCode::ROUND],
         ];
     }
@@ -167,10 +166,10 @@ class SearchingTest extends TestWithMockery
 
     /**
      * @test
-     * @expectedException  \DrdPlus\Searching\Exceptions\ThoroughSearchCanNotBeMadeWhenDoingFullConcentrationActivity
      */
     public function I_can_not_make_thorough_search_when_doing_full_concentration_activity()
     {
+        $this->expectException(\DrdPlus\Searching\Exceptions\ThoroughSearchCanNotBeMadeWhenDoingFullConcentrationActivity::class);
         (new Searching(ActivityIntensityCode::getIt(ActivityIntensityCode::ACTIVITY_WITH_FULL_CONCENTRATION)))
             ->getThoroughSearchQuality(
                 $this->createRollOnSenses(123, true),
@@ -202,9 +201,9 @@ class SearchingTest extends TestWithMockery
             [0, 0.0, TimeUnitCode::MINUTE],
             [0.1, 0.05, TimeUnitCode::MINUTE],
             [1, 0.5, TimeUnitCode::MINUTE],
-            [2*5, 5.0, TimeUnitCode::MINUTE], /** @link https://pph.drdplus.drdplus.info/#cas_prohledani_prostoru_o_rozmerech_2_5_metru */
-            [2*(4*2 + 5*2), 18.0, TimeUnitCode::MINUTE], /** @link https://pph.drdplus.drdplus.info/#cas_prohledani_mistnosti_o_rozmerech_4_5_2_metru */
-            [2*(4*2 + 5*2) + 4*5, 28.0, TimeUnitCode::MINUTE], /** @link https://pph.drdplus.drdplus.info/#cas_prohledani_mistnosti_o_rozmerech_4_5_2_metru */
+            [2 * 5, 5.0, TimeUnitCode::MINUTE], /** @link https://pph.drdplus.drdplus.info/#cas_prohledani_prostoru_o_rozmerech_2_5_metru */
+            [2 * (4 * 2 + 5 * 2), 18.0, TimeUnitCode::MINUTE], /** @link https://pph.drdplus.drdplus.info/#cas_prohledani_mistnosti_o_rozmerech_4_5_2_metru */
+            [2 * (4 * 2 + 5 * 2) + 4 * 5, 28.0, TimeUnitCode::MINUTE], /** @link https://pph.drdplus.drdplus.info/#cas_prohledani_mistnosti_o_rozmerech_4_5_2_metru */
             [95, 47.5, TimeUnitCode::MINUTE],
         ];
     }
